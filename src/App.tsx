@@ -22,13 +22,11 @@ function App() {
   const [users, setUsers] = useState<User[]>();
 
   const getUsers = async () => {
-    console.log("HIT");
     const response = await fetch(
       "https://techop-rpa-functions.azurewebsites.net/api/getUsers?",
       {}
     );
     const result = await response.json();
-    console.log("RES: ", result);
     setUsers(result);
   };
 
