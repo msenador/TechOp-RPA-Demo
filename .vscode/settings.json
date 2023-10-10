@@ -1,5 +1,12 @@
 {
   "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
   "appService.defaultWebAppToDeploy": "/subscriptions/79c98404-0f8a-4a97-b6c8-4c177439383a/resourceGroups/techop-rpa-demo_group/providers/Microsoft.Web/sites/techop-rpa-demo",
-  "appService.deploySubpath": "."
+  "appService.deploySubpath": ".",
+  "azureFunctions.deploySubpath": "azureFunctions",
+  "azureFunctions.postDeployTask": "npm install (functions)",
+  "azureFunctions.projectLanguage": "TypeScript",
+  "azureFunctions.projectRuntime": "~4",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.projectLanguageModel": 4,
+  "azureFunctions.preDeployTask": "npm prune (functions)"
 }

@@ -1,55 +1,56 @@
 import React, { useEffect, useState } from "react";
-import logo from "./logo.svg";
+import styled from "styled-components";
 import "./App.css";
+
+const Container = styled.div`
+  padding: 100px;
+`;
+
+const EditBtn = styled.button`
+  cursor: pointer;
+`;
 
 export interface User {
   _id: string;
-  name: string;
-  eyes: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  occupation: string;
 }
 
 function App() {
   const [users, setUsers] = useState<User[]>();
 
-  const initDb = async () => {
+  const getUsers = async () => {
+    console.log("HIT");
     const response = await fetch(
-      "https://techop-rpa-demo-functions.azurewebsites.net/api/init-db?code=FW8mFHW6aZIZwKC-DwAoxslckCbNw-5vlLGCfffvtWVdAzFuLfLZ-g==",
+      "https://techop-rpa-functions.azurewebsites.net/api/getUsers?",
       {}
     );
-    const json = await response.json();
-    console.log("J: ", json);
-    setUsers(json);
+    const result = await response.json();
+    console.log("RES: ", result);
+    setUsers(result);
   };
 
   useEffect(() => {
-    initDb();
+    getUsers();
   }, []);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Test ing<code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Container>
+      <h1>USERS</h1>
       {users?.map((user) => {
         return (
           <div>
-            <div>Name: {user.name}</div>
-            <li>Eyes: {user.eyes}</li>
+            <h3>Email: {user.email}</h3>
+            <li>Lastname: {user.lastName}</li>
+            <li>Firstname: {user.firstName}</li>
+            <li>Occupation: {user.occupation}</li>
+            <EditBtn id={user.firstName}>Edit</EditBtn>
           </div>
         );
       })}
-    </div>
+    </Container>
   );
 }
 
